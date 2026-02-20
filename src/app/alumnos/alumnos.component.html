@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div *ngIf="!this.alumnos[0]" class="alert alert-warning mt-3">
+    <div *ngIf="!this.alumnos[0]" class="alert {{estilo()}} mt-3">
         {{ mensage() }}
     </div>
 

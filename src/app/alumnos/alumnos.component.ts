@@ -79,6 +79,14 @@ export class AlumnosComponent implements OnInit {
     return msg;
   }
 
+  estilo() {
+    if (!this.alumnos[0] && this.dni && this.buscando) {
+      return "alert-warning";
+    } else {
+      return "alert-info";
+    }
+  }
+
   soloNumeros(event: KeyboardEvent) {
     const char = String.fromCharCode(event.keyCode);
     if (!/[0-9]/.test(char)) {
