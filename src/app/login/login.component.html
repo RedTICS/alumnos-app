@@ -1,0 +1,45 @@
+<!-- <h2>Login</h2>
+<form (ngSubmit)="login()">
+    <input type="text" placeholder="Usuario" [(ngModel)]="username" name="username" required>
+    <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required>
+    <button type="submit">Ingresar</button>
+</form> -->
+
+<div class="login-container d-flex align-items-center justify-content-center vh-100">
+
+    <div class="card shadow-lg p-4 login-card">
+        <h3 class="text-center mb-4">Ingreso Alumnos</h3>
+
+        <form (ngSubmit)="login()">
+            <!-- Usuario -->
+            <div class="mb-3">
+                <label class="form-label">Usuario</label>
+                <input type="text" class="form-control" placeholder="Ingrese usuario" [(ngModel)]="username"
+                       name="usuario" required />
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" placeholder="Ingrese contraseña" [(ngModel)]="password"
+                       name="password" required />
+            </div>
+
+            <!-- Error -->
+            <div *ngIf="error" class="alert alert-danger py-1">
+                {{ error }}
+            </div>
+
+            <!-- Botón -->
+            <button class="btn btn-primary w-100 mt-3" [disabled]="loading">
+                <span *ngIf="!loading">Ingresar</span>
+                <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+            </button>
+        </form>
+
+        <div class="text-center mt-3 text-muted small">
+            {{ title}}
+        </div>
+    </div>
+
+</div>

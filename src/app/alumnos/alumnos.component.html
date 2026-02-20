@@ -1,0 +1,89 @@
+<div class="container mt-4">
+
+    <h3 class="fw-bold text-primary mb-3">📋 {{modo}} Alumnos</h3>
+
+    <!-- Buscador -->
+    <div class="card p-3 shadow-sm mb-4">
+        <div class="row g-2">
+            <div class="col-md-4 col-sm-4">
+                <label class="form-label">Buscar DNI</label>
+                <input (keypress)="soloNumeros($event)" class="form-control" [(ngModel)]="dni"
+                       (ngModelChange)="limpiar()">
+            </div>
+            <div class="col-md-2 align-self-end">
+                <button class="btn btn-primary w-100" (click)="buscarAlumno()">Buscar</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!this.alumnos[0]" class="alert alert-warning mt-3">
+        {{ mensage() }}
+    </div>
+
+    <!-- Grid responsive -->
+    <div class="card p-3 shadow-sm mb-4" *ngIf="mostrarDatos && alumnos[0]">
+
+        <div *ngFor="let alumno of alumnos">
+
+            <div *ngIf="alumno && alumno.DNI" class="card-body">
+
+                <h6 class="mb-2">
+                    <label class="form-label">DNI</label>
+                    <input class="form-control form-control-sm" [value]="alumno.DNI" disabled="true">
+                </h6>
+
+                <div class="mb-2">
+                    <label class="form-label">Apellido y Nombre</label>
+                    <input class="form-control form-control-sm" [value]="alumno.apellido_nombres" disabled="true">
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Fecha Nacimiento</label>
+                    <input type="text" class="form-control form-control-sm" [value]="fechaNac(alumno.fecha_nacimiento)"
+                           disabled="true">
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Nivel</label>
+                    <input class="form-control form-control-sm" [(ngModel)]="alumno.nivel" disabled="true">
+                </div>
+
+                <div *ngIf="carga" class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="alumno.esquema_completo"
+                           [disabled]="!carga">
+                    <label class="form-check-label">Esquema completo</label>
+                </div>
+
+                <div *ngIf="!carga" class="mb-2">
+                    <span *ngIf="alumno.esquema_completo; else incompleto" class="badge bg-success">
+                        ✔ Esquema Completo
+                    </span>
+                    <ng-template #incompleto>
+                        <span class="badge bg-danger">
+                            ❌ Esquema Incompleto.
+                            Acercarse al centro de salud mas cercano !
+                        </span>
+                    </ng-template>
+                </div>
+
+                <button *ngIf="carga" class="btn btn-success btn-sm w-100" (click)="guardar(alumno)"
+                        [disabled]="esquema_completo === alumno.esquema_completo">
+                    💾 Guardar
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="d-flex ms-auto">
+                <button *ngIf="auth.isLogged()" class="btn btn-outline-danger" (click)="logout()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </nav>
+
+</div>
