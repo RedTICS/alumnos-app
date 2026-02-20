@@ -27,7 +27,7 @@ export class ApiService {
         return this.http.post(`${this.baseUrl}/alumnos`, alumno);
     }
 
-    editarAlumno(id: string, alumno: any): Observable<any> {
-        return this.http.put(`${this.baseUrl}/alumnos/${id}`, alumno);
+    editarAlumno(dni: Number, alumno: any): Observable<any> {
+        return this.http.put(`${this.baseUrl}/alumnos/${dni}`, alumno);
     }
 }

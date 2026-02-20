@@ -48,7 +48,7 @@ export class AlumnosComponent implements OnInit {
   }
 
   guardar(alumno: any) {
-    this.api.editarAlumno(alumno.Id, alumno).subscribe(() => {
+    this.api.editarAlumno(alumno.DNI, alumno).subscribe(() => {
       this.esquema_completo = alumno.esquema_completo;
       alert('Alumno actualizado');
     });
