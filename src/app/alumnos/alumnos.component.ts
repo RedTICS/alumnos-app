@@ -16,7 +16,7 @@ export class AlumnosComponent implements OnInit {
   alumnos: any[] = [];
   dni: string = '';
   nuevoAlumno: any = { dni: '', apellido_nombres: '', fecha_nacimiento: '', nivel: '', esquema_completo: false };
-  modo: string = this.carga ? 'Edición' : 'Consulta';
+  modo: string = 'Consulta';
   mostrarDatos = false;
   esquema_completo: boolean = false;
   buscando: boolean = false;
@@ -29,7 +29,8 @@ export class AlumnosComponent implements OnInit {
 
   ngOnInit() {
     const pay = this.auth.getPayload();
-    this.carga = (pay.username === 'carga');
+    this.carga = (pay.role === 'write');
+    this.modo = this.carga ? 'Edición' : 'Consulta';
   }
 
   buscarAlumno() {
