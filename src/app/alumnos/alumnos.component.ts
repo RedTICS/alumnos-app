@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-alumnos',
   templateUrl: './alumnos.component.html',
-  imports: [FormsModule, CommonModule],
-  styleUrls: ['./alumnos.component.css']
+  imports: [FormsModule, CommonModule]
 })
 
 export class AlumnosComponent implements OnInit {
@@ -30,23 +29,19 @@ export class AlumnosComponent implements OnInit {
 
   ngOnInit() {
     const pay = this.auth.getPayload();
-    console.log('Payload:', pay);
     this.carga = (pay.username === 'carga');
   }
 
   buscarAlumno() {
     this.buscando = true;
     if (!this.dni) {
-      console.log('DNI:', this.dni)
       this.alumnos = [];
       this.mostrarDatos = false;
     } else {
-      console.log('Buscando DNI:', this.dni)
       this.api.getAlumno(this.dni).subscribe(data => {
         this.alumnos = [data];
         this.esquema_completo = this.alumnos[0] ? this.alumnos[0].esquema_completo : false;
         this.mostrarDatos = this.alumnos.length ? true : false;
-        console.log('Alumnos:', this.alumnos)
       });
     }
   }
@@ -66,7 +61,6 @@ export class AlumnosComponent implements OnInit {
   }
 
   limpiar() {
-    console.log('limpiar():', this.dni);
     this.alumnos = [];
     this.mostrarDatos = false;
     this.buscando = false;

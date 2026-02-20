@@ -8,7 +8,7 @@
             <div class="col-md-4 col-sm-4">
                 <label class="form-label">Buscar DNI</label>
                 <input (keypress)="soloNumeros($event)" class="form-control" [(ngModel)]="dni"
-                       (ngModelChange)="limpiar()">
+                       (ngModelChange)="limpiar()" (keydown.enter)="buscarAlumno()">
             </div>
             <div class="col-md-2 align-self-end">
                 <button class="btn btn-primary w-100" (click)="buscarAlumno()">Buscar</button>
@@ -22,10 +22,8 @@
 
     <!-- Grid responsive -->
     <div class="card p-3 shadow-sm mb-4" *ngIf="mostrarDatos && alumnos[0]">
-
-        <div *ngFor="let alumno of alumnos">
-
-            <div *ngIf="alumno && alumno.DNI" class="card-body">
+        <ng-container *ngFor="let alumno of alumnos">
+            <ng-container *ngIf="alumno && alumno.DNI" class="card-body">
 
                 <h6 class="mb-2">
                     <label class="form-label">DNI</label>
@@ -71,9 +69,8 @@
                     💾 Guardar
                 </button>
 
-            </div>
-
-        </div>
+            </ng-container>
+        </ng-container>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
